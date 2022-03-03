@@ -1,0 +1,13 @@
+<div class="container">
+  <h3>Mes Voyages</h3>
+  <div *ngFor="let article of articles">
+    <div class="card mb-3 col-6">
+      <h5 class="card-header"></h5>
+      <div class="card-body">
+        <h5 class="card-title">{{ article.title | titlecase }}</h5>
+        <p class="card-text">{{ article.description}}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
