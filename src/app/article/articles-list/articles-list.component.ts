@@ -24,4 +24,6 @@ export class ArticlesListComponent implements OnInit {
     this.articles = this.ArticlesData.getAllArticles();
   }
 
+
+
 }

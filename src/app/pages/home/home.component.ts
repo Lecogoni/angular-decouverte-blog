@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   }
 
   onViewAllArticles() {
-    this.router.navigateByUrl('articles');
+    this.router.navigateByUrl('/articles');
   }
 
 }

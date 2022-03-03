@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { Article } from 'src/app/models/article.models';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticlesDataService {
+
+  // URL to web api
+  articlesApiUrl = 'http://localhost:8080/api/article/2';
 
   /**
    * hard coding of blog article
@@ -36,14 +44,15 @@ export class ArticlesDataService {
     }
   ]
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   /**
    * use to retrieve the array with all articles
    * @returns an aray conatining all articles
    */
-  getAllArticles(): Article[] {
-    return this.articles;
+  getAllArticles() {
+    //return this.articles;
+    return this.http.get(this.articlesApiUrl)
   }
 
   /**
@@ -60,5 +69,7 @@ export class ArticlesDataService {
       return article;
     }
   }
+
+
 
 }
