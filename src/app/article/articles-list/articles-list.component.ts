@@ -14,14 +14,20 @@ export class ArticlesListComponent implements OnInit {
    */
   articles!: Article[];
 
-  constructor(private ArticlesData: ArticlesDataService) { }
+  constructor(private service: ArticlesDataService) { }
 
   /**
    * OnInit
    * add all the messages present in the services - injected in the constructor - and store them in the local array articles
    */
   ngOnInit(): void {
-    this.articles = this.ArticlesData.getAllArticles();
+    // this.service
+    //   .getObservableMessages()
+    //   .subscribe(data => this.articles = data)
+    // console.log(this.articles);
+
+    this.service.getDataFromBck()
+
   }
 
 
