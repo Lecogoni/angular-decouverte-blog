@@ -2,3 +2,14 @@
   <h2>Welcome sur travel blog</h2>
   <button type="button" (click)="onViewAllArticles()" class="btn btn-primary">Voir mes articles</button>
 </div>
+
+<div class="container mt-5">
+  <h2>Subscribe to our newsletter</h2>
+  <form (ngSubmit)="onSubmitForm()">
+    <label for="email">entrez votre email</label>
+    <br>
+    <input type="text" id="email" name="email" [(ngModel)]="email">
+    <br>
+    <button class=" btn btn-primary mt-3" type="submit">ok !</button>
+  </form>
+</div>

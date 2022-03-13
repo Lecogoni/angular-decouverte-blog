@@ -8,13 +8,27 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  email: string = 'tyoto';
+
+  data = {
+    email: "nico"
+  }
+
+
+  constructor(private router: Router) {
+    this.email = 'coucou';
+  }
 
   ngOnInit(): void {
   }
 
   onViewAllArticles() {
     this.router.navigateByUrl('/articles');
+  }
+
+  onSubmitForm(): void {
+    console.log(this.email);
+
   }
 
 }

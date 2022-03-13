@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { filter, interval, map, Observable, Subject, take } from 'rxjs';
 import { Article } from 'src/app/models/article.models';
 import { ArticlesDataService } from '../services/articles-data.service';
 
@@ -14,22 +15,32 @@ export class ArticlesListComponent implements OnInit {
    */
   articles!: Article[];
 
+  myObservable$!: Observable<String>;
+
   constructor(private service: ArticlesDataService) { }
 
   /**
    * OnInit
-   * add all the messages present in the services - injected in the constructor - and store them in the local array articles
+   * add all the messages present in the services
+   * injected in the constructor - and store them in the local array articles
    */
   ngOnInit(): void {
-    // this.service
-    //   .getObservableMessages()
-    //   .subscribe(data => this.articles = data)
-    // console.log(this.articles);
 
-    this.service.getDataFromBck()
+    // exo openclassrooms
 
+    // this.myObservable$ = interval(1000).pipe(
+    //   take(2),
+    //   filter(value => value % 3 === 0),
+    //   map(value => value % 2 === 0 ?
+    //     `Je suis ${value} et je suis pair` :
+    //     `Je suis ${value} et je suis impair`
+    //   )
+    // );
+
+
+    this.service.setData().subscribe((res) => this.articles = res);
+    this.service.loginTest('nico');
   }
-
 
 
 }

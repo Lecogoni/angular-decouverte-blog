@@ -14,6 +14,8 @@ export class ArticlesDataService {
   // URL to web api
   articlesApiUrl = 'http://localhost:8080/api/articles';
 
+
+  // Observables set with articles from backend durign oinstanciation / constructor
   private subject = new BehaviorSubject<Article[]>([]);
 
   /**
@@ -46,34 +48,51 @@ export class ArticlesDataService {
     }
   ]
 
-  //
+  /**
+   * Constructor
+   * @param http 
+   */
   constructor(private http: HttpClient) {
-    this.subject.next([{
-      id: 0,
-      title: 'périple en inde',
-      description: "Qui iste reiciendis vel aspernatur excepturi id voluptatem tempore quo aliquid consequatur et galisum dolorem est vero mollitia qui accusamus laudantium.",
-      createdDate: new Date(),
-      likes: 1,
-      imageUrl: "https://i.dailymail.co.uk/i/pix/2015/11/19/17/2E9971C500000578-3325659-image-a-48_1447953828909.jpg",
-    }]);
+
+    // fetch articles from node backend
+    this.setArticles();
+
   }
 
+  // Return array of articles set in hard coding in this class
   getObservableMessages(): Observable<Article[]> {
-
     return of(this.articles);
-
   }
 
-  getDataFromBck() {
+  /**
+   * Connect with http to node backend and update the observation subject
+   */
+  setArticles() {
     this.http.get<any>('http://localhost:8080/api/articles')
       .pipe()
       .subscribe(
         (res) => {
-          this.subject.next(res)
+          this.subject.next(res);
         }
       )
   }
 
+  /**
+   * use to return the observable subject, initialise with all articles durung te construc
+   * @returns the observable subject
+   */
+  setData() {
+    return this.subject.asObservable()
+  }
+
+
+  loginTest(user: string) {
+    this.http.get<any>(`http://localhost:8080/api/signin?user=${user}`)
+  }
+
+
+
+  // Model of backend request
 
   // this.http.get<any>('http://localhost:3030/messages')
   //     .pipe()
@@ -90,25 +109,7 @@ export class ArticlesDataService {
   //     )
 
 
-  // next: (res) => console.error(res),
-  //   error: (err) => console.error(err),
-  //   complete: () => console.info('complete')
 
-  //
-  //return this.http.get<Article[]>(this.articlesApiUrl).pipe(map(articles => articles));
-  //.pipe(map((response: any) => response.json()));
-  //, { responseType: 'json' }
-
-
-
-  /**
-   * use to retrieve the array with all articles
-   * @returns an array containing all articles
-   */
-  // getAllArticles(): Article[] {
-  //   return this.articles;
-  //   
-  // }
 
   /**
    * find one article in the articles array by its id received as params
